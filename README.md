@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # vivarium-webapp
 
 ## Build Setup
@@ -18,3 +19,6 @@ $ yarn generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+=======
+# vivarium-webapp
+>>>>>>> 31829ce8170d0cb4f8e41d86bbdda8eb2c51d23f

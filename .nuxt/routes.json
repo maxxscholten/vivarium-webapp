@@ -1,0 +1,9 @@
+[
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/home/maxx/vivarium-webapp/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_122b0119"
+  }
+]
