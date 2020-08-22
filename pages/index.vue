@@ -127,6 +127,7 @@ export default {
     },
   },
   mounted() {
+    console.log(this.$axios.defaults.baseURL)
     setInterval(() => {
       this.chartSeries.forEach((series) => {
         series.data = series.data.slice(series.data.length - 20)

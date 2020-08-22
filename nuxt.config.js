@@ -30,6 +30,9 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
+  axios: {
+    baseURL: process.env.BASE_URL || '/',
+  },
 
   serverMiddleware: ['@/api/proxy.js'],
   /*
@@ -66,11 +69,6 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
   ],
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
-  axios: {},
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/

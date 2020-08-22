@@ -5,22 +5,22 @@
     "../server/index.ssr.html",
     "4.08ff1d2.js",
     "LICENSES",
-    "app.c311f1f.js",
+    "app.b8e34c9.js",
     "fonts/element-icons.535877f.woff",
     "fonts/element-icons.732389d.ttf",
     "manifest.340911d6.json",
-    "pages/index.ef2b251.js",
-    "runtime.eca1dba.js",
+    "pages/index.0c04c9a.js",
+    "runtime.1ae692e.js",
     "vendors/commons.4fe6658.js"
   ],
   "initial": [
-    "runtime.eca1dba.js",
+    "runtime.1ae692e.js",
     "vendors/commons.4fe6658.js",
-    "app.c311f1f.js"
+    "app.b8e34c9.js"
   ],
   "async": [
     "4.08ff1d2.js",
-    "pages/index.ef2b251.js"
+    "pages/index.0c04c9a.js"
   ],
   "modules": {
     "16300275": [
@@ -61,6 +61,9 @@
     ],
     "74589062": [
       10
+    ],
+    "76297121": [
+      8
     ],
     "76306970": [
       10
@@ -2133,13 +2136,10 @@
     "279e4ff8": [
       8
     ],
-    "4658c5b7": [
-      8
-    ],
     "0f49cd3e": [
       8
     ],
-    "e925a3ba": [
+    "89844ce6": [
       8
     ],
     "1b24d02f": [
@@ -2151,13 +2151,13 @@
       "4.08ff1d2.js"
     ],
     "1a3ae26b": [
-      "app.c311f1f.js"
+      "app.b8e34c9.js"
     ],
     "2a130dde": [
-      "pages/index.ef2b251.js"
+      "pages/index.0c04c9a.js"
     ],
     "6fca0322": [
-      "runtime.eca1dba.js"
+      "runtime.1ae692e.js"
     ],
     "07a97964": [
       "vendors/commons.4fe6658.js"
