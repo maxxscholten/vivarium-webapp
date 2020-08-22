@@ -4,8 +4,6 @@
 
     <div>
       <br />
-      <br />
-      <br />
       <label>Lights</label>
       <el-switch
         v-model="lightsStatus"
