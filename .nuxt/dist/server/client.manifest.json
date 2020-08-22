@@ -5,7 +5,7 @@
     "../server/index.ssr.html",
     "4.08ff1d2.js",
     "LICENSES",
-    "app.b8e34c9.js",
+    "app.0fc8af5.js",
     "fonts/element-icons.535877f.woff",
     "fonts/element-icons.732389d.ttf",
     "manifest.340911d6.json",
@@ -16,7 +16,7 @@
   "initial": [
     "runtime.1ae692e.js",
     "vendors/commons.4fe6658.js",
-    "app.b8e34c9.js"
+    "app.0fc8af5.js"
   ],
   "async": [
     "4.08ff1d2.js",
@@ -2151,7 +2151,7 @@
       "4.08ff1d2.js"
     ],
     "1a3ae26b": [
-      "app.b8e34c9.js"
+      "app.0fc8af5.js"
     ],
     "2a130dde": [
       "pages/index.0c04c9a.js"
