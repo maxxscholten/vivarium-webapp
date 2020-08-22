@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 app.get('/mist', async (req, res) => {
   try {
     console.log('mist')
-    await axios.get('/mist')
+    await axios.get('https://68.199.47.113:3001/mist')
     res.send('success')
   } catch (err) {
     console.log(err)
@@ -22,7 +22,7 @@ app.get('/mist', async (req, res) => {
 app.get('/lights/:status', async (req, res) => {
   try {
     const status = req.params.status
-    await axios.get(`/lights/${status}`)
+    await axios.get(`https://68.199.47.113:3001/lights/${status}`)
     res.send('success')
   } catch (err) {
     console.log(err)

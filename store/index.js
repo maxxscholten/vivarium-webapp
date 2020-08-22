@@ -14,6 +14,12 @@ const mutations = {
       state.humiture = data.humiture
     }
   },
+  SOCKET_ONERROR(state, value) {
+    console.log(value)
+  },
+  SOCKET_ONCLOSE(state, value) {
+    console.log(value)
+  },
 }
 
 const actions = {}

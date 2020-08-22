@@ -23,9 +23,6 @@
         :series="chartSeries"
       />
     </div>
-    <div>
-      {{ chartSeries }}
-    </div>
   </div>
 </template>
 

@@ -5,22 +5,22 @@
     "../server/index.ssr.html",
     "4.08ff1d2.js",
     "LICENSES",
-    "app.cb1f07b.js",
+    "app.c311f1f.js",
     "fonts/element-icons.535877f.woff",
     "fonts/element-icons.732389d.ttf",
     "manifest.340911d6.json",
-    "pages/index.c38e553.js",
-    "runtime.f3426be.js",
+    "pages/index.ef2b251.js",
+    "runtime.eca1dba.js",
     "vendors/commons.4fe6658.js"
   ],
   "initial": [
-    "runtime.f3426be.js",
+    "runtime.eca1dba.js",
     "vendors/commons.4fe6658.js",
-    "app.cb1f07b.js"
+    "app.c311f1f.js"
   ],
   "async": [
     "4.08ff1d2.js",
-    "pages/index.c38e553.js"
+    "pages/index.ef2b251.js"
   ],
   "modules": {
     "16300275": [
@@ -2133,13 +2133,13 @@
     "279e4ff8": [
       8
     ],
-    "bf627834": [
+    "4658c5b7": [
       8
     ],
     "0f49cd3e": [
       8
     ],
-    "3539a75c": [
+    "e925a3ba": [
       8
     ],
     "1b24d02f": [
@@ -2151,13 +2151,13 @@
       "4.08ff1d2.js"
     ],
     "1a3ae26b": [
-      "app.cb1f07b.js"
+      "app.c311f1f.js"
     ],
     "2a130dde": [
-      "pages/index.c38e553.js"
+      "pages/index.ef2b251.js"
     ],
     "6fca0322": [
-      "runtime.f3426be.js"
+      "runtime.eca1dba.js"
     ],
     "07a97964": [
       "vendors/commons.4fe6658.js"
