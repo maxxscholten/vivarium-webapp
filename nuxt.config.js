@@ -2,7 +2,9 @@ export default {
   mode: 'universal',
   target: 'server',
   env: {
-    wsUrl: process.env.WS_URL || 'ws://localhost:3001',
+    wsUrl:
+      `${process.env.WS_URL}:${process.env.PORT}` ||
+      `ws://localhost:${process.env.PORT}`,
   },
   server: {
     port: process.env.PORT || 3000,
