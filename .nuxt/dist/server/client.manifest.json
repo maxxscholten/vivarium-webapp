@@ -11,11 +11,11 @@
     "manifest.340911d6.json",
     "pages/index.0c04c9a.js",
     "runtime.1ae692e.js",
-    "vendors/commons.4fe6658.js"
+    "vendors/commons.8f8ab7c.js"
   ],
   "initial": [
     "runtime.1ae692e.js",
-    "vendors/commons.4fe6658.js",
+    "vendors/commons.8f8ab7c.js",
     "app.b8e34c9.js"
   ],
   "async": [
@@ -2160,7 +2160,7 @@
       "runtime.1ae692e.js"
     ],
     "07a97964": [
-      "vendors/commons.4fe6658.js"
+      "vendors/commons.8f8ab7c.js"
     ]
   }
 }

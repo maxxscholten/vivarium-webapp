@@ -14,7 +14,7 @@ export default {
    ** See https://nuxtjs.org/api/configuration-head
    */
   server: {
-    port: 3000,
+    port: process.env.PORT || 3000,
     host: '0.0.0.0',
   },
   head: {
