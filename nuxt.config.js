@@ -1,18 +1,9 @@
 export default {
-  /*
-   ** Nuxt rendering mode
-   ** See https://nuxtjs.org/api/configuration-mode
-   */
   mode: 'universal',
-  /*
-   ** Nuxt target
-   ** See https://nuxtjs.org/api/configuration-target
-   */
   target: 'server',
-  /*
-   ** Headers of the page
-   ** See https://nuxtjs.org/api/configuration-head
-   */
+  env: {
+    wsUrl: process.env.WS_URL || 'ws://localhost:3001',
+  },
   server: {
     port: process.env.PORT || 3000,
     host: '0.0.0.0',
@@ -35,44 +26,16 @@ export default {
   },
 
   serverMiddleware: ['@/api/proxy.js', '@/api/websocket.js'],
-  /*
-   ** Global CSS
-   */
   css: ['element-ui/lib/theme-chalk/index.css'],
-  /*
-   ** Plugins to load before mounting the App
-   ** https://nuxtjs.org/guide/plugins
-   */
   plugins: [
     '@/plugins/element-ui',
     { src: '@/plugins/vue-visjs.js', ssr: false },
     { src: '@/plugins/vue-apexchart.js', ssr: false },
     { src: '@/plugins/native-websocket', ssr: false },
   ],
-  /*
-   ** Auto import components
-   ** See https://nuxtjs.org/api/configuration-components
-   */
   components: true,
-  /*
-   ** Nuxt.js dev-modules
-   */
-  buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module',
-  ],
-  /*
-   ** Nuxt.js modules
-   */
-  modules: [
-    // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa',
-  ],
-  /*
-   ** Build configuration
-   ** See https://nuxtjs.org/api/configuration-build/
-   */
+  buildModules: ['@nuxtjs/eslint-module'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/pwa'],
   build: {
     transpile: [/^element-ui/],
   },
