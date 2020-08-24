@@ -34,7 +34,7 @@ export default {
     baseURL: process.env.BASE_URL || '/',
   },
 
-  serverMiddleware: ['@/api/proxy.js'],
+  serverMiddleware: ['@/api/proxy.js', '@/api/websocket.js'],
   /*
    ** Global CSS
    */
