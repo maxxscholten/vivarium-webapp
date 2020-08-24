@@ -1,8 +1,8 @@
 import VueNativeSock from 'vue-native-websocket'
 import Vue from 'vue'
 
-export default ({ store }, inject) => {
-  console.log(process.env.wsUrl)
-  console.log(process.env.PORT)
-  Vue.use(VueNativeSock, process.env.wsUrl, { store })
+export default ({ store, env }, inject) => {
+  console.log(process.env)
+  console.log(env)
+  Vue.use(VueNativeSock, env.wsUrl, { store })
 }

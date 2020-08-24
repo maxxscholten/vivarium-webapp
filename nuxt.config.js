@@ -1,4 +1,4 @@
-console.log(process.env)
+console.log(process.env.PORT)
 export default {
   mode: 'universal',
   target: 'server',
@@ -28,7 +28,7 @@ export default {
     baseURL: process.env.BASE_URL || '/',
   },
 
-  serverMiddleware: ['@/api/proxy.js', '@/api/websocket.js'],
+  serverMiddleware: ['@/api/proxy.js'],
   css: ['element-ui/lib/theme-chalk/index.css'],
   plugins: [
     '@/plugins/element-ui',
@@ -38,7 +38,7 @@ export default {
   ],
   components: true,
   buildModules: ['@nuxtjs/eslint-module'],
-  modules: ['@nuxtjs/axios', '@nuxtjs/pwa'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@/modules/websocket.js'],
   build: {
     transpile: [/^element-ui/],
   },

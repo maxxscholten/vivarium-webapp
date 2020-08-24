@@ -9,6 +9,7 @@ const getters = {
 const mutations = {
   SOCKET_ONOPEN(state, value) {},
   SOCKET_ONMESSAGE(state, msg) {
+    console.log(msg)
     const data = JSON.parse(msg.data)
     if (data.humiture) {
       state.humiture = data.humiture
