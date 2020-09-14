@@ -1,30 +1,35 @@
 <template>
   <div class="container">
-    <el-button @click="runMister()">Mist</el-button>
+    <div class="row">
+      <div class="stats" v-html="stats" />
 
-    <div>
-      <br />
-      <label>Lights</label>
-      <el-switch
-        v-model="lightsStatus"
-        :active-value="1"
-        :inactive-value="0"
-        @change="switchLight"
-      ></el-switch>
+      <div class="controls">
+        <el-button @click="runMister()">Mist</el-button>
+        <br />
+        <label>Lights</label>
+        <el-switch
+          v-model="lightsStatus"
+          :active-value="1"
+          :inactive-value="0"
+          @change="switchLight"
+        ></el-switch>
+      </div>
 
-      <apexchart
+      <!--<apexchart
         ref="chart"
         class="apex-chart"
         :width="600"
         :height="300"
         :options="chartOptions"
         :series="chartSeries"
-      />
+      />-->
     </div>
   </div>
 </template>
 
 <script>
+import moment from 'moment-timezone'
+import prettyMilliseconds from 'pretty-ms';
 import { mapGetters } from 'vuex'
 export default {
   components: {},
@@ -35,12 +40,12 @@ export default {
       chartSeries: [
         {
           name: 'Humidity',
-          data: [],
+          data: []
         },
         {
           name: 'Temperature',
-          data: [],
-        },
+          data: []
+        }
       ],
       chartOptions: {
         chart: {
@@ -48,31 +53,51 @@ export default {
           height: 350,
           type: 'line',
           animations: {
-            // enabled: true,
+            enabled: true,
             easing: 'linear',
             dynamicAnimation: {
-              // speed: 5000,
-            },
+            speed: 1000 * 60,
+            }
           },
           toolbar: {
-            show: false,
+            show: false
           },
           zoom: {
-            enabled: false,
-          },
+            enabled: false
+          }
         },
         dataLabels: {
-          enabled: false,
+          enabled: false
         },
         stroke: {
-          curve: 'smooth',
+          width: 2,
+          curve: 'smooth'
         },
         markers: {
-          size: 2,
+          size: 0
+        },
+        tooltip: {
+            x: {
+            show: true,
+            format: 'hh:mm',
+        },
         },
         xaxis: {
-          type: 'datetime',
-          // range: 60000,
+          range: 600000,
+          tickAmount: 2,
+          labels: {
+            show: true,
+            datetimeUTC: false,
+            formatter: (val) => {
+              return moment(val).format('hh:mm a')
+            },
+            datetimeFormatter: {
+              year: 'yyyy',
+              month: "MMM 'yy",
+              day: 'dd MMM',
+              hour: 'hh:mm a'
+            }
+          }
         },
         yaxis: [
           {
@@ -83,8 +108,8 @@ export default {
             max: 100,
             title: {
               text: 'Temperature (°F)',
-              style: {},
-            },
+              style: {}
+            }
           },
 
           {
@@ -96,58 +121,101 @@ export default {
             max: 100,
             title: {
               text: 'Humidity (%)',
-              style: {},
-            },
-          },
+              style: {}
+            }
+          }
         ],
         legend: {
-          show: true,
-        },
-      },
+          show: true
+        }
+      }
     }
   },
   computed: {
     ...mapGetters({
-      humiture: 'humiture',
+      vivStore: 'vivStore'
     }),
+    stats() {
+      console.log(this.vivStore)
+      return `
+        Temperature: ${this.vivStore.humiture.temperature}<br/>
+        Humidity: ${this.vivStore.humiture.humidity}<br/><br/>
+
+        Waterbowl: ${this.vivStore.water.sensor.state ? 'Full' : 'Empty'}<br/><br/>
+
+        Waterpump: ${this.vivStore.water.pump.state ? 'Running' : 'Off'}<br/>
+        Waterpump Automation: ${this.vivStore.water.pump.automate ? "Automatic" : "Manual"}<br/>
+        Waterpump Countdown: ${prettyMilliseconds(this.vivStore.water.pump.countdown)}<br/>
+        Waterpump Runtime: ${prettyMilliseconds(this.vivStore.water.pump.runtime)}<br/><br/>
+
+        Mister: ${this.vivStore.mister.state ? 'Running' : 'Off'}<br/>
+        Mister Automation: ${this.vivStore.mister.automate ? "Automatic" : "Manual"}<br/>
+        Mister Countdown: ${prettyMilliseconds(this.vivStore.mister.countdown)}<br/>
+        Mister Runtime: ${prettyMilliseconds(this.vivStore.mister.runtime)}<br/><br/>
+
+        Lights: ${this.lightsState}
+        Lights Automation: ${this.vivStore.lights.automate ? "Automatic" : "Manual"}<br/>
+        Lights Countdown: ${prettyMilliseconds(this.vivStore.lights.countdown)}<br/>
+        Lights Runtime: ${prettyMilliseconds(this.vivStore.lights.runtime)}<br/><br/>
+
+        Sunrise: ${this.secondsToTime(this.vivStore.lights.sunrise)}a<br/>
+        Sunset: ${this.secondsToTime(this.vivStore.lights.sunset)}p
+      `
+    }
   },
   watch: {
-    humiture(val, oldVal) {
+    store(val, oldVal) {
+    }
+  },
+  mounted() {
+    setTimeout( () => {
+      this.updateChart();
+      setInterval(() => { this.updateChart() }, 1000 * 60)
+    }, 1000 * 60);
+
+    // Reset the dataset to prevent memory leak
+    setInterval(() => {
+      this.chartSeries.forEach(series => {
+        series.data = series.data.slice(series.data.length - 20)
+      })
+    }, 1000 * 60 * 60)
+  },
+  methods: {
+    secondsToTime(t)  {
+      const dt = new Date(t);
+      const hr = (dt.getHours() + 24) % 12 || 12;;
+      const m = "0" + dt.getMinutes();
+
+      return hr + ':' + m.substr(-2)
+    },
+    updateChart() {
       const time = new Date().getTime()
+      console.log(this.vivStore)
       this.chartSeries[0].data.push({
         x: time,
-        y: val.humidity,
+        y: this.vivStore.humiture.humidity
       })
 
       this.chartSeries[1].data.push({
         x: time,
-        y: val.temperature,
+        y: this.vivStore.humiture.temperature
       })
       this.$refs.chart.updateSeries(this.chartSeries)
     },
-  },
-  mounted() {
-    console.log(this.$axios.defaults.baseURL)
-    setInterval(() => {
-      this.chartSeries.forEach((series) => {
-        series.data = series.data.slice(series.data.length - 20)
-      })
-    }, 60000)
-  },
-  methods: {
     async switchLight() {
       const status = +!this.lightsStatus
       await this.$axios.get(`/api/proxy/lights/${status}`)
     },
     async runMister() {
       await this.$axios.get('/api/proxy/mist')
-    },
-  },
+    }
+  }
 }
 </script>
 
 <style>
 .container {
+  background: #000;
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
@@ -155,5 +223,31 @@ export default {
   align-items: center;
   text-align: center;
   flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.stats,
+.controls {
+  text-align: left;
+  padding: 20px;
+  border-radius: 4px;
+  width: 400px;
+
+  font: 1rem Inconsolata, monospace;
+}
+
+.stats {
+  background: #111;
+  color: green;
+}
+
+.controls {
+  color: #fff;
+  background: #111;
+  margin-left: 20px;
 }
 </style>

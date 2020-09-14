@@ -1,11 +1,9 @@
-console.log(process.env.PORT)
 export default {
   mode: 'universal',
   target: 'server',
   env: {
     wsUrl:
-      `${process.env.WS_URL}:${process.env.PORT}` ||
-      `ws://localhost:${process.env.PORT}`,
+      `ws://localhost:${process.env.PORT || '3000'}`,
   },
   server: {
     port: process.env.PORT || 3000,
@@ -37,7 +35,7 @@ export default {
     { src: '@/plugins/native-websocket', ssr: false },
   ],
   components: true,
-  buildModules: ['@nuxtjs/eslint-module'],
+ // buildModules: ['@nuxtjs/eslint-module'],
   modules: ['@nuxtjs/axios', '@nuxtjs/pwa', '@/modules/websocket.js'],
   build: {
     transpile: [/^element-ui/],

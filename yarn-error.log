@@ -1,20 +1,20 @@
 Arguments: 
-  /usr/local/bin/node /usr/share/yarn/bin/yarn.js add express-ws
+  /usr/local/bin/node /usr/local/bin/yarn add moment-timezone
 
 PATH: 
-  /usr/lib/google-cloud-sdk/bin:/home/maxx/.local/bin:/usr/lib/google-cloud-sdk/bin:/home/maxx/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/android/sdk/tools/:/usr/local/android/sdk/platform-tools/:/usr/local/android/sdk/tools/:/usr/local/android/sdk/platform-tools/
+  /usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/opt/gnu-sed/libexec/gnubin:/Users/mscholten/Library/Android/sdk/tools:/Users/mscholten/Library/Android/sdk/platform-tools:/Users/mscholten/Library/Android/sdk/tools:/Users/mscholten/Library/Android/sdk/platform-tools
 
 Yarn version: 
-  1.22.4
+  1.10.1
 
 Node version: 
-  14.3.0
+  14.10.1
 
 Platform: 
-  linux x64
+  darwin x64
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/home/maxx/vivarium-webapp/node_modules/@babel/traverse/node_modules/debug/CHANGELOG.md'
+  Error: EACCES: permission denied, rmdir '/Users/mscholten/Sites/vivarium-webapp/node_modules/.cache/babel-loader'
 
 npm manifest: 
   {
@@ -36,6 +36,7 @@ npm manifest:
       "cors": "^2.8.5",
       "deepmerge": "^4.2.2",
       "element-ui": "^2.13.2",
+      "express-ws": "^4.0.0",
       "fs": "^0.0.1-security",
       "moment": "^2.27.0",
       "nuxt": "^2.14.0",
@@ -3862,6 +3863,13 @@ Lockfile:
       regex-not "^1.0.0"
       snapdragon "^0.8.1"
       to-regex "^3.0.1"
+  
+  express-ws@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.yarnpkg.com/express-ws/-/express-ws-4.0.0.tgz#dabd8dc974516418902a41fe6e30ed949b4d36c4"
+    integrity sha512-KEyUw8AwRET2iFjFsI1EJQrJ/fHeGiJtgpYgEWG3yDv4l/To/m3a2GaYfeGyB3lsWdvbesjF5XCMx+SVBgAAYw==
+    dependencies:
+      ws "^5.2.0"
   
   express@^4.16.3:
     version "4.17.1"
@@ -8948,6 +8956,13 @@ Lockfile:
     integrity sha512-/lg70HAjtkUgWPVZhZcm+T4hkL8Zbtp1nFNOn3lRrxnlv50SRBv7cR7RqR+GMsd3hUXy9hWBo4CHTbFTcOYwig==
     dependencies:
       mkdirp "^0.5.1"
+  
+  ws@^5.2.0:
+    version "5.2.2"
+    resolved "https://registry.yarnpkg.com/ws/-/ws-5.2.2.tgz#dffef14866b8e8dc9133582514d1befaf96e980f"
+    integrity sha512-jaHFD6PFv6UgoIVda6qZllptQsMlDEJkTQcybzzXDYM1XO9Y8em691FGMPmM46WGyLU4z9KMgQN+qrux/nhlHA==
+    dependencies:
+      async-limiter "~1.0.0"
   
   ws@^6.0.0:
     version "6.2.1"
