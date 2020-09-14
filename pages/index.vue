@@ -4,15 +4,19 @@
       <div class="stats" v-html="stats" />
 
       <div class="controls">
-        <el-button @click="runMister()">Mist</el-button>
-        <br />
-        <label>Lights</label>
-        <el-switch
-          v-model="lightsStatus"
-          :active-value="1"
-          :inactive-value="0"
-          @change="switchLight"
-        ></el-switch>
+        <div style="margin-bottom: 20px;">
+          <el-button class="button" @click="runMister()">Mist</el-button>
+        </div>
+        <div>
+          <label>Lights</label>
+          <el-switch
+            class="switch"
+            v-model="lightsStatus"
+            :active-value="1"
+            :inactive-value="0"
+            @change="switchLight"
+          ></el-switch>
+        </div>
       </div>
 
       <!--<apexchart
@@ -153,7 +157,7 @@ export default {
         Mister Countdown: ${prettyMilliseconds(this.vivStore.mister.countdown)}<br/>
         Mister Runtime: ${prettyMilliseconds(this.vivStore.mister.runtime)}<br/><br/>
 
-        Lights: ${this.lightsState}
+        Lights: ${this.vivStore.lights.state ? "On" : "Off"}<br/>
         Lights Automation: ${this.vivStore.lights.automate ? "Automatic" : "Manual"}<br/>
         Lights Countdown: ${prettyMilliseconds(this.vivStore.lights.countdown)}<br/>
         Lights Runtime: ${prettyMilliseconds(this.vivStore.lights.runtime)}<br/><br/>
@@ -164,10 +168,16 @@ export default {
     }
   },
   watch: {
-    store(val, oldVal) {
+    vivStore: {
+      deep: true,
+      handler: function (val, oldVal) {
+        console.log('test', val)
+        this.lightsStatus = val.lights.state;
+    }
     }
   },
   mounted() {
+    this.lightsStatus = this.vivStore.lights.state;
     setTimeout( () => {
       this.updateChart();
       setInterval(() => { this.updateChart() }, 1000 * 60)
@@ -217,6 +227,7 @@ export default {
 .container {
   background: #000;
   margin: 0 auto;
+  width: 100%;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -235,8 +246,8 @@ export default {
   text-align: left;
   padding: 20px;
   border-radius: 4px;
-  width: 400px;
-
+  width: 50%;
+  max-width: 400px;
   font: 1rem Inconsolata, monospace;
 }
 
@@ -249,5 +260,28 @@ export default {
   color: #fff;
   background: #111;
   margin-left: 20px;
+}
+
+.button,
+.switch {
+  background: #0e2135;
+  border-color: #0e2135;
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .stats,
+  .controls {
+    width: 90%;
+    margin: 0;
+  }
+  .controls {
+    margin-top: 20px;
+  }
+  .row {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 </style>

@@ -150,7 +150,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: '/',
-      env: {"wsUrl":"ws://localhost:3000"}
+      env: {"wsUrl":"undefined:undefined"}
     }
     // Only set once
     if (!process.static && context.req) {
