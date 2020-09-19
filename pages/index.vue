@@ -3,7 +3,7 @@
     <div class="row">
       <div class="stats" v-html="stats" />
 
-      <div class="controls">
+      <!--<div class="controls">
         <div style="margin-bottom: 20px;">
           <el-button class="button" @click="runMister()">Mist</el-button>
         </div>
@@ -17,23 +17,24 @@
             @change="switchLight"
           ></el-switch>
         </div>
+      </div>-->
+      <div class="chart">
+        <apexchart
+          ref="chart"
+          class="apex-chart"
+          width="100%"
+          height="100%"
+          :options="chartOptions"
+          :series="chartSeries"
+        />
       </div>
-
-      <!--<apexchart
-        ref="chart"
-        class="apex-chart"
-        :width="600"
-        :height="300"
-        :options="chartOptions"
-        :series="chartSeries"
-      />-->
     </div>
   </div>
 </template>
 
 <script>
 import moment from 'moment-timezone'
-import prettyMilliseconds from 'pretty-ms';
+import prettyMilliseconds from 'pretty-ms'
 import { mapGetters } from 'vuex'
 export default {
   components: {},
@@ -44,14 +45,33 @@ export default {
       chartSeries: [
         {
           name: 'Humidity',
-          data: []
+          data: [],
         },
         {
           name: 'Temperature',
-          data: []
-        }
+          data: [],
+        },
       ],
       chartOptions: {
+        legend: {
+          show: true,
+          offsetX: 0,
+          offsetY: 5,
+          markers: {
+            width: 8,
+            height: 8,
+          },
+        },
+        grid: {
+          show: false,
+          padding: {
+            top: 0,
+            right: 0,
+            bottom: 10,
+            left: 0,
+          },
+        },
+        colors: ['#FF0000', '#0000FF'],
         chart: {
           id: 'realtime',
           height: 350,
@@ -60,33 +80,40 @@ export default {
             enabled: true,
             easing: 'linear',
             dynamicAnimation: {
-            speed: 1000 * 60,
-            }
+              speed: 1000 * 60,
+            },
           },
           toolbar: {
-            show: false
+            show: false,
           },
           zoom: {
-            enabled: false
-          }
+            enabled: false,
+          },
         },
         dataLabels: {
-          enabled: false
+          enabled: false,
         },
         stroke: {
           width: 2,
-          curve: 'smooth'
+          curve: 'smooth',
         },
         markers: {
-          size: 0
+          size: 0,
         },
         tooltip: {
-            x: {
+          theme: 'dark',
+          x: {
             show: true,
             format: 'hh:mm',
-        },
+          },
         },
         xaxis: {
+          axisBorder: {
+            show: false,
+          },
+          axisTicks: {
+            show: false,
+          },
           range: 600000,
           tickAmount: 2,
           labels: {
@@ -99,9 +126,9 @@ export default {
               year: 'yyyy',
               month: "MMM 'yy",
               day: 'dd MMM',
-              hour: 'hh:mm a'
-            }
-          }
+              hour: 'hh:mm a',
+            },
+          },
         },
         yaxis: [
           {
@@ -112,8 +139,8 @@ export default {
             max: 100,
             title: {
               text: 'Temperature (°F)',
-              style: {}
-            }
+              style: {},
+            },
           },
 
           {
@@ -125,90 +152,118 @@ export default {
             max: 100,
             title: {
               text: 'Humidity (%)',
-              style: {}
-            }
-          }
+              style: {},
+            },
+          },
         ],
-        legend: {
-          show: true
-        }
-      }
+      },
     }
   },
   computed: {
     ...mapGetters({
-      vivStore: 'vivStore'
+      vivStore: 'vivStore',
     }),
     stats() {
-      console.log(this.vivStore)
       return `
         Temperature: ${this.vivStore.humiture.temperature}<br/>
         Humidity: ${this.vivStore.humiture.humidity}<br/><br/>
 
-        Waterbowl: ${this.vivStore.water.sensor.state ? 'Full' : 'Empty'}<br/><br/>
+        Waterbowl State: ${
+          this.vivStore.water.sensor.state
+            ? '<span style="background: green; color: black;">Full</span>'
+            : '<span style="background: red; color: black;">Empty</span>'
+        }<br/><br/>
 
-        Waterpump: ${this.vivStore.water.pump.state ? 'Running' : 'Off'}<br/>
-        Waterpump Automation: ${this.vivStore.water.pump.automate ? "Automatic" : "Manual"}<br/>
-        Waterpump Countdown: ${prettyMilliseconds(this.vivStore.water.pump.countdown)}<br/>
-        Waterpump Runtime: ${prettyMilliseconds(this.vivStore.water.pump.runtime)}<br/><br/>
+        Waterpump: ${
+          this.vivStore.water.pump.state
+            ? '<span style="background: green; color: black;">Running</span>'
+            : '<span style="background: red; color: black;">Off</span>'
+        }<br/>
+        Waterpump Automation: ${
+          this.vivStore.water.pump.automate ? 'Automatic' : 'Manual'
+        }<br/>
+        Waterpump Countdown: ${prettyMilliseconds(
+          this.vivStore.water.pump.countdown
+        )}<br/>
+        Waterpump Runtime: ${prettyMilliseconds(
+          this.vivStore.water.pump.runtime
+        )}<br/><br/>
 
-        Mister: ${this.vivStore.mister.state ? 'Running' : 'Off'}<br/>
-        Mister Automation: ${this.vivStore.mister.automate ? "Automatic" : "Manual"}<br/>
-        Mister Countdown: ${prettyMilliseconds(this.vivStore.mister.countdown)}<br/>
-        Mister Runtime: ${prettyMilliseconds(this.vivStore.mister.runtime)}<br/><br/>
+        Mister: ${
+          this.vivStore.mister.state
+            ? '<span style="background: green; color: black;">Running</span>'
+            : '<span style="background: red; color: black;">Off</span>'
+        }<br/>
+        Mister Automation: ${
+          this.vivStore.mister.automate ? 'Automatic' : 'Manual'
+        }<br/>
+        Mister Countdown: ${prettyMilliseconds(
+          this.vivStore.mister.countdown
+        )}<br/>
+        Mister Runtime: ${prettyMilliseconds(
+          this.vivStore.mister.runtime
+        )}<br/><br/>
 
-        Lights: ${this.vivStore.lights.state ? "On" : "Off"}<br/>
-        Lights Automation: ${this.vivStore.lights.automate ? "Automatic" : "Manual"}<br/>
-        Lights Countdown: ${prettyMilliseconds(this.vivStore.lights.countdown)}<br/>
-        Lights Runtime: ${prettyMilliseconds(this.vivStore.lights.runtime)}<br/><br/>
+        Lights: ${
+          this.vivStore.lights.state
+            ? '<span style="background: green; color: black;">On</span>'
+            : '<span style="background: red; color: black;">Off</span>'
+        }<br/>
+        Lights Automation: ${
+          this.vivStore.lights.automate ? 'Automatic' : 'Manual'
+        }<br/>
+        Lights Countdown: ${prettyMilliseconds(
+          this.vivStore.lights.countdown
+        )}<br/>
+        Lights Runtime: ${prettyMilliseconds(
+          this.vivStore.lights.runtime
+        )}<br/><br/>
 
         Sunrise: ${this.secondsToTime(this.vivStore.lights.sunrise)}a<br/>
         Sunset: ${this.secondsToTime(this.vivStore.lights.sunset)}p
       `
-    }
+    },
   },
   watch: {
     vivStore: {
       deep: true,
       handler: function (val, oldVal) {
-        console.log('test', val)
-        this.lightsStatus = val.lights.state;
-    }
-    }
+        this.lightsStatus = val.lights.state
+      },
+    },
   },
   mounted() {
-    this.lightsStatus = this.vivStore.lights.state;
-    setTimeout( () => {
-      this.updateChart();
-      setInterval(() => { this.updateChart() }, 1000 * 60)
-    }, 1000 * 60);
+    this.lightsStatus = this.vivStore.lights.state
+    this.updateChart()
+    setInterval(() => {
+      this.updateChart()
+    }, 1000)
 
     // Reset the dataset to prevent memory leak
     setInterval(() => {
-      this.chartSeries.forEach(series => {
+      this.chartSeries.forEach((series) => {
         series.data = series.data.slice(series.data.length - 20)
       })
     }, 1000 * 60 * 60)
   },
   methods: {
-    secondsToTime(t)  {
-      const dt = new Date(t);
-      const hr = (dt.getHours() + 24) % 12 || 12;;
-      const m = "0" + dt.getMinutes();
+    secondsToTime(t) {
+      const dt = new Date(t)
+      const hr = (dt.getHours() + 24) % 12 || 12
+      const m = '0' + dt.getMinutes()
 
       return hr + ':' + m.substr(-2)
     },
     updateChart() {
       const time = new Date().getTime()
-      console.log(this.vivStore)
       this.chartSeries[0].data.push({
         x: time,
-        y: this.vivStore.humiture.humidity
+        y: this.vivStore.humiture.humidity,
       })
 
       this.chartSeries[1].data.push({
         x: time,
-        y: this.vivStore.humiture.temperature
+        y: this.vivStore.humiture.temperature,
       })
       this.$refs.chart.updateSeries(this.chartSeries)
     },
@@ -218,14 +273,16 @@ export default {
     },
     async runMister() {
       await this.$axios.get('/api/proxy/mist')
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style>
-.container {
+html {
   background: #000;
+}
+.container {
   margin: 0 auto;
   width: 100%;
   min-height: 100vh;
@@ -237,28 +294,42 @@ export default {
 }
 
 .row {
+  width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
 }
 .stats,
-.controls {
+.controls,
+.chart {
+  background: #111;
   text-align: left;
   padding: 20px;
   border-radius: 4px;
-  width: 50%;
+  width: 100%;
   max-width: 400px;
   font: 1rem Inconsolata, monospace;
 }
 
+.chart {
+  margin-left: 20px;
+  padding: 0;
+  min-height: 300px;
+}
+
+.chart text,
+.apexcharts-legend-text {
+  color: green !important;
+  fill: green;
+  font: 1rem Inconsolata, monospace !important;
+}
+
 .stats {
-  background: #111;
   color: green;
 }
 
 .controls {
   color: #fff;
-  background: #111;
   margin-left: 20px;
 }
 
@@ -271,12 +342,16 @@ export default {
 
 @media screen and (max-width: 768px) {
   .stats,
-  .controls {
+  .controls,
+  .chart {
     width: 90%;
     margin: 0;
   }
-  .controls {
+  .stats {
     margin-top: 20px;
+  }
+  .chart {
+    margin: 20px 0;
   }
   .row {
     flex-direction: column;
