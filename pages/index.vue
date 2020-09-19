@@ -19,14 +19,16 @@
         </div>
       </div>-->
       <div class="chart">
-        <apexchart
-          ref="chart"
-          class="apex-chart"
-          width="100%"
-          height="100%"
-          :options="chartOptions"
-          :series="chartSeries"
-        />
+        <client-only>
+          <apexchart
+            ref="chart"
+            class="apex-chart"
+            width="100%"
+            height="100%"
+            :options="chartOptions"
+            :series="chartSeries"
+          />
+        </client-only>
       </div>
     </div>
   </div>
@@ -39,7 +41,7 @@ import { mapGetters } from 'vuex'
 export default {
   components: {},
   props: {},
-  data() {
+  data: function () {
     return {
       lightsStatus: 0,
       chartSeries: [
@@ -104,7 +106,9 @@ export default {
           theme: 'dark',
           x: {
             show: true,
-            format: 'hh:mm',
+            formatter: (val) => {
+              return moment(val).format('hh:mm:ss a')
+            },
           },
         },
         xaxis: {
@@ -116,6 +120,11 @@ export default {
           },
           range: 600000,
           tickAmount: 2,
+          tooltip: {
+            formatter: (val) => {
+              return moment(val).format('hh:mm:ss a')
+            },
+          },
           labels: {
             show: true,
             datetimeUTC: false,
@@ -256,16 +265,19 @@ export default {
     },
     updateChart() {
       const time = new Date().getTime()
-      this.chartSeries[0].data.push({
+      let chartSeries = JSON.parse(JSON.stringify(this.chartSeries))
+      chartSeries[0].data.push({
         x: time,
         y: this.vivStore.humiture.humidity,
       })
 
-      this.chartSeries[1].data.push({
+      chartSeries[1].data.push({
         x: time,
         y: this.vivStore.humiture.temperature,
       })
-      this.$refs.chart.updateSeries(this.chartSeries)
+      this.chartSeries = chartSeries
+      if (process.client) {
+      }
     },
     async switchLight() {
       const status = +!this.lightsStatus

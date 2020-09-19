@@ -1,7 +1,6 @@
 console.log(process.env)
 export default {
   mode: 'universal',
-  target: 'server',
   env: {
     wsUrl:
       `${process.env.WS_URL}:${process.env.PORT}` ||
