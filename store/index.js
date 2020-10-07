@@ -1,6 +1,11 @@
 const state = () => ({
   vivStore: {
     humiture: {},
+    heater: {
+      state: 0,
+      runtime: 0,
+      automate: 1,
+    },
     water: {
       sensor: {
         state: 1,

@@ -13,10 +13,9 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_plugin_5923d408 from 'nuxt_plugin_plugin_5923d408' // Source: ./components/plugin.js (mode: 'all')
-import nuxt_plugin_workbox_9bb01e8c from 'nuxt_plugin_workbox_9bb01e8c' // Source: ./workbox.js (mode: 'client')
-import nuxt_plugin_nuxticons_0c35a0ea from 'nuxt_plugin_nuxticons_0c35a0ea' // Source: ./nuxt-icons.js (mode: 'all')
-import nuxt_plugin_axios_3ec469c4 from 'nuxt_plugin_axios_3ec469c4' // Source: ./axios.js (mode: 'all')
+import nuxt_plugin_plugin_7ae7d1cf from 'nuxt_plugin_plugin_7ae7d1cf' // Source: ./components/plugin.js (mode: 'all')
+import nuxt_plugin_workbox_6b522b41 from 'nuxt_plugin_workbox_6b522b41' // Source: ./workbox.js (mode: 'client')
+import nuxt_plugin_axios_3252fb65 from 'nuxt_plugin_axios_3252fb65' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_elementui_d905880e from 'nuxt_plugin_elementui_d905880e' // Source: ../plugins/element-ui (mode: 'all')
 import nuxt_plugin_vuevisjs_35f28049 from 'nuxt_plugin_vuevisjs_35f28049' // Source: ../plugins/vue-visjs.js (mode: 'client')
 import nuxt_plugin_vueapexchart_c7fc7154 from 'nuxt_plugin_vueapexchart_c7fc7154' // Source: ../plugins/vue-apexchart.js (mode: 'client')
@@ -73,7 +72,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"vivarium-webapp","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"## Build Setup"},{"hid":"mobile-web-app-capable","name":"mobile-web-app-capable","content":"yes"},{"hid":"apple-mobile-web-app-title","name":"apple-mobile-web-app-title","content":"vivarium-webapp"},{"hid":"theme-color","name":"theme-color","content":"black"},{"hid":"og:type","name":"og:type","property":"og:type","content":"website"},{"hid":"og:title","name":"og:title","property":"og:title","content":"vivarium-webapp"},{"hid":"og:site_name","name":"og:site_name","property":"og:site_name","content":"vivarium-webapp"},{"hid":"og:description","name":"og:description","property":"og:description","content":"## Build Setup"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"manifest","href":"\u002F_nuxt\u002Fmanifest.340911d6.json"},{"rel":"shortcut icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_64x64.5f6a36.png"},{"rel":"apple-touch-icon","href":"\u002F_nuxt\u002Ficons\u002Ficon_512x512.5f6a36.png","sizes":"512x512"}],"style":[],"script":[],"htmlAttrs":{"lang":"en"}},
+    head: {"title":"vivarium-webapp","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"## Build Setup"},{"hid":"mobile-web-app-capable","name":"mobile-web-app-capable","content":"yes"},{"hid":"apple-mobile-web-app-title","name":"apple-mobile-web-app-title","content":"vivarium-webapp"},{"hid":"theme-color","name":"theme-color","content":"black"},{"hid":"og:type","name":"og:type","property":"og:type","content":"website"},{"hid":"og:title","name":"og:title","property":"og:title","content":"vivarium-webapp"},{"hid":"og:site_name","name":"og:site_name","property":"og:site_name","content":"vivarium-webapp"},{"hid":"og:description","name":"og:description","property":"og:description","content":"## Build Setup"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"manifest","href":"\u002F_nuxt\u002Fmanifest.0d2ca2af.json"}],"style":[],"script":[],"htmlAttrs":{"lang":"en"}},
 
     store,
     router,
@@ -202,20 +201,16 @@ async function createApp(ssrContext, config = {}) {
   }
   // Plugin execution
 
-  if (typeof nuxt_plugin_plugin_5923d408 === 'function') {
-    await nuxt_plugin_plugin_5923d408(app.context, inject)
+  if (typeof nuxt_plugin_plugin_7ae7d1cf === 'function') {
+    await nuxt_plugin_plugin_7ae7d1cf(app.context, inject)
   }
 
-  if (process.client && typeof nuxt_plugin_workbox_9bb01e8c === 'function') {
-    await nuxt_plugin_workbox_9bb01e8c(app.context, inject)
+  if (process.client && typeof nuxt_plugin_workbox_6b522b41 === 'function') {
+    await nuxt_plugin_workbox_6b522b41(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_nuxticons_0c35a0ea === 'function') {
-    await nuxt_plugin_nuxticons_0c35a0ea(app.context, inject)
-  }
-
-  if (typeof nuxt_plugin_axios_3ec469c4 === 'function') {
-    await nuxt_plugin_axios_3ec469c4(app.context, inject)
+  if (typeof nuxt_plugin_axios_3252fb65 === 'function') {
+    await nuxt_plugin_axios_3252fb65(app.context, inject)
   }
 
   if (typeof nuxt_plugin_elementui_d905880e === 'function') {

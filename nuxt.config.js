@@ -1,10 +1,14 @@
-console.log(process.env)
+console.log(process.env.PORT)
 export default {
   mode: 'universal',
   env: {
     wsUrl:
-      `${process.env.WS_URL}:${process.env.PORT}` ||
-      `ws://localhost:${process.env.PORT}`,
+      process.env.WS_URL !== undefined
+        ? `${process.env.WS_URL}:${process.env.PORT}`
+        : `ws://localhost:3000`,
+    videoStreamUrl: process.env.WS_URL !== undefined
+    ? process.env.VIDEO_STREAM_URL
+    : `http://192.168.86.25:8000/`,
   },
   server: {
     port: process.env.PORT || 3000,

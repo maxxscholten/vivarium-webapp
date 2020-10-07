@@ -16,7 +16,6 @@ webappSocket.on('connection', (ws) => {
 
 export default function () {
   this.nuxt.hook('listen', (server) => {
-    console.log(server)
     server.on('upgrade', (request, socket, head) => {
       webappSocket.handleUpgrade(request, socket, head, (ws) => {
         webappSocket.emit('connection', ws)

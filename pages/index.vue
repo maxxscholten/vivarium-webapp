@@ -30,6 +30,10 @@
           />
         </client-only>
       </div>
+      <div class="video"><iframe :src="videoStreamUrl" height="100%" width="100%" frameBorder="0"/></div>
+
+    </div>
+    <div>
     </div>
   </div>
 </template>
@@ -172,10 +176,26 @@ export default {
     ...mapGetters({
       vivStore: 'vivStore',
     }),
+    videoStreamUrl() {
+      return process.env.videoStreamUrl;
+    },
     stats() {
       return `
         Temperature: ${this.vivStore.humiture.temperature}<br/>
         Humidity: ${this.vivStore.humiture.humidity}<br/><br/>
+
+        Heater: ${
+          this.vivStore.heater.state
+            ? '<span style="background: green; color: black;">Running</span>'
+            : '<span style="background: red; color: black;">Off</span>'
+        }<br/>
+        Heater Automation: ${
+          this.vivStore.heater.automate ? 'Automatic' : 'Manual'
+        }<br/>
+        Heater Runtime: ${prettyMilliseconds(
+          this.vivStore.heater.runtime
+        )}<br/><br/>
+
 
         Waterbowl State: ${
           this.vivStore.water.sensor.state
@@ -310,23 +330,41 @@ html {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  padding: 0 20px;
 }
 .stats,
 .controls,
-.chart {
+.chart,
+.video {
   background: #111;
   text-align: left;
   padding: 20px;
   border-radius: 4px;
+  overflow: hidden;
   width: 100%;
   max-width: 400px;
   font: 1rem Inconsolata, monospace;
 }
 
-.chart {
+.chart,
+.video{
   margin-left: 20px;
   padding: 0;
   min-height: 300px;
+}
+
+.video iframe {
+  margin: 0 auto;
+  position: relative;
+  left: -1px;
+}
+
+.video {
+  overflow: hidden;
+  width: 50%;
+  max-width: 730px;
+  display: flex;
+  justify-content: center;
 }
 
 .chart text,
@@ -352,12 +390,20 @@ html {
   color: #fff;
 }
 
+
 @media screen and (max-width: 768px) {
   .stats,
   .controls,
-  .chart {
+  .chart,
+  .video {
     width: 90%;
     margin: 0;
+  }
+  .video {
+    max-width: 400px;
+  }
+  .video iframe {
+    height: 300px;
   }
   .stats {
     margin-top: 20px;
