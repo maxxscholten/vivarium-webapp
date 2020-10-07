@@ -150,7 +150,7 @@ export async function setContext (app, context) {
       payload: context.payload,
       error: context.error,
       base: '/',
-      env: {"wsUrl":"ws://localhost:3000","videoStreamUrl":"http://192.168.86.25:8000/"}
+      env: {"wsUrl":"ws://localhost:3000","videoStreamUrl":"http://68.199.47.113:8000/"}
     }
     // Only set once
     if (!process.static && context.req) {
