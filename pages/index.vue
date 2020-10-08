@@ -30,11 +30,16 @@
           />
         </client-only>
       </div>
-      <div class="video"><iframe :src="videoStreamUrl" height="100%" width="100%" frameBorder="0"/></div>
-
+      <div class="video">
+        <iframe
+          src="http://68.199.47.113:8000/"
+          height="100%"
+          width="100%"
+          frameBorder="0"
+        ></iframe>
+      </div>
     </div>
-    <div>
-    </div>
+    <div></div>
   </div>
 </template>
 
@@ -177,7 +182,7 @@ export default {
       vivStore: 'vivStore',
     }),
     videoStreamUrl() {
-      return process.env.videoStreamUrl;
+      return process.env.videoStreamUrl
     },
     stats() {
       return `
@@ -347,7 +352,7 @@ html {
 }
 
 .chart,
-.video{
+.video {
   margin-left: 20px;
   padding: 0;
   min-height: 300px;
@@ -389,7 +394,6 @@ html {
   border-color: #0e2135;
   color: #fff;
 }
-
 
 @media screen and (max-width: 768px) {
   .stats,
