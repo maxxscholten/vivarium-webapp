@@ -23,6 +23,7 @@
     "moment-timezone": "^0.5.31",
     "nuxt": "^2.14.0",
     "pretty-ms": "^7.0.0",
+    "request": "^2.88.2",
     "vis-data": "^7.0.0",
     "vis-timeline": "^7.3.7",
     "vue-apexcharts": "1.6.0",

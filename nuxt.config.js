@@ -6,9 +6,10 @@ export default {
       process.env.WS_URL !== undefined
         ? `${process.env.WS_URL}:${process.env.PORT}`
         : `ws://localhost:3000`,
-    videoStreamUrl: process.env.WS_URL !== undefined
-    ? process.env.VIDEO_STREAM_URL
-    : `http://68.199.47.113:8000/`,
+    videoStreamUrl:
+      process.env.WS_URL !== undefined
+        ? process.env.VIDEO_STREAM_URL
+        : `http://68.199.47.113:8000/`,
   },
   server: {
     port: process.env.PORT || 3000,

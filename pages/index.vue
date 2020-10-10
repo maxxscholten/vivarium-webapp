@@ -31,12 +31,7 @@
         </client-only>
       </div>
       <div class="video">
-        <iframe
-          src="https://68.199.47.113/"
-          height="100%"
-          width="100%"
-          frameBorder="0"
-        ></iframe>
+        <img src="/api/proxy/stream" height="100%" width="100%" />
       </div>
     </div>
     <div></div>
@@ -181,9 +176,6 @@ export default {
     ...mapGetters({
       vivStore: 'vivStore',
     }),
-    videoStreamUrl() {
-      return process.env.videoStreamUrl
-    },
     stats() {
       return `
         Temperature: ${this.vivStore.humiture.temperature}<br/>
@@ -279,6 +271,25 @@ export default {
         series.data = series.data.slice(series.data.length - 20)
       })
     }, 1000 * 60 * 60)
+
+    /*this.$connect('wss://68.199.47.113:3001', { format: 'json' })
+    this.ws1 = this.$socket
+    this.ws1.onmessage = (data) => {
+      console.log(data)
+    }*/
+
+    var ctx = this.$refs['streamCanvas'].getContext('2d')
+
+    this.$connect('ws://68.199.47.113:54018', { format: 'json' })
+    this.ws2 = this.$socket
+
+    this.ws2.onmessage = (data) => {
+      let image = new Image()
+      image.onload = function () {
+        ctx.drawImage(image, 0, 0)
+      }
+      image.src = data.data
+    }
   },
   methods: {
     secondsToTime(t) {

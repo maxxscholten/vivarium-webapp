@@ -2,6 +2,7 @@ const express = require('express')
 const https = require('https')
 const axios = require('axios')
 const cors = require('cors')
+const request = require('request')
 const app = express()
 
 const httpsAgent = new https.Agent({
@@ -12,6 +13,29 @@ app.use(cors())
 
 app.get('/', (req, res) => {
   res.send('Proxy for vivarium-server')
+})
+
+app.get('/stream', function (req, res) {
+  var request_options = {
+    url: 'http://68.199.47.113:8000/stream.mjpg',
+  }
+
+  var req_pipe = request(request_options)
+  req_pipe.pipe(res)
+
+  req_pipe.on('error', function (e) {
+    console.log(e)
+  })
+  //client quit normally
+  req.on('end', function () {
+    console.log('end')
+    req_pipe.abort()
+  })
+  //client quit unexpectedly
+  req.on('close', function () {
+    console.log('close')
+    req_pipe.abort()
+  })
 })
 
 app.get('/mist', async (req, res) => {
