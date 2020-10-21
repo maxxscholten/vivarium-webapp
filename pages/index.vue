@@ -31,7 +31,11 @@
         </client-only>
       </div>
       <div class="video">
-        <img src="/api/proxy/stream" height="100%" width="100%" />
+        <div
+          style="background-image: url(/api/proxy/stream)"
+          height="100%"
+          width="100%"
+        />
       </div>
     </div>
     <div></div>
@@ -381,6 +385,15 @@ html {
   max-width: 730px;
   display: flex;
   justify-content: center;
+}
+
+.video div {
+  background-size: cover;
+  background-position: 50% 50%;
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  transform: rotateX(180deg);
 }
 
 .chart text,
