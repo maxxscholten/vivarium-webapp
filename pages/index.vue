@@ -30,22 +30,22 @@
           />
         </client-only>
       </div>
-      <div class="video">
+      <!--<div class="video">
         <div
           style="background-image: url(/api/proxy/stream)"
           height="100%"
           width="100%"
         />
-      </div>
+      </div> -->
     </div>
     <div></div>
   </div>
 </template>
 
 <script>
-import moment from 'moment-timezone'
-import prettyMilliseconds from 'pretty-ms'
-import { mapGetters } from 'vuex'
+import moment from "moment-timezone";
+import prettyMilliseconds from "pretty-ms";
+import { mapGetters } from "vuex";
 export default {
   components: {},
   props: {},
@@ -54,11 +54,11 @@ export default {
       lightsStatus: 0,
       chartSeries: [
         {
-          name: 'Humidity',
+          name: "Humidity",
           data: [],
         },
         {
-          name: 'Temperature',
+          name: "Temperature",
           data: [],
         },
       ],
@@ -81,14 +81,14 @@ export default {
             left: 0,
           },
         },
-        colors: ['#FF0000', '#0000FF'],
+        colors: ["#FF0000", "#0000FF"],
         chart: {
-          id: 'realtime',
+          id: "realtime",
           height: 350,
-          type: 'line',
+          type: "line",
           animations: {
             enabled: true,
-            easing: 'linear',
+            easing: "linear",
             dynamicAnimation: {
               speed: 1000 * 60,
             },
@@ -105,17 +105,17 @@ export default {
         },
         stroke: {
           width: 2,
-          curve: 'smooth',
+          curve: "smooth",
         },
         markers: {
           size: 0,
         },
         tooltip: {
-          theme: 'dark',
+          theme: "dark",
           x: {
             show: true,
             formatter: (val) => {
-              return moment(val).format('hh:mm:ss a')
+              return moment(val).format("hh:mm:ss a");
             },
           },
         },
@@ -130,20 +130,20 @@ export default {
           tickAmount: 2,
           tooltip: {
             formatter: (val) => {
-              return moment(val).format('hh:mm:ss a')
+              return moment(val).format("hh:mm:ss a");
             },
           },
           labels: {
             show: true,
             datetimeUTC: false,
             formatter: (val) => {
-              return moment(val).format('hh:mm a')
+              return moment(val).format("hh:mm a");
             },
             datetimeFormatter: {
-              year: 'yyyy',
+              year: "yyyy",
               month: "MMM 'yy",
-              day: 'dd MMM',
-              hour: 'hh:mm a',
+              day: "dd MMM",
+              hour: "hh:mm a",
             },
           },
         },
@@ -155,7 +155,7 @@ export default {
             min: 50,
             max: 100,
             title: {
-              text: 'Temperature (°F)',
+              text: "Temperature (°F)",
               style: {},
             },
           },
@@ -168,17 +168,17 @@ export default {
             min: 50,
             max: 100,
             title: {
-              text: 'Humidity (%)',
+              text: "Humidity (%)",
               style: {},
             },
           },
         ],
       },
-    }
+    };
   },
   computed: {
     ...mapGetters({
-      vivStore: 'vivStore',
+      vivStore: "vivStore",
     }),
     stats() {
       return `
@@ -190,12 +190,8 @@ export default {
             ? '<span style="background: green; color: black;">Running</span>'
             : '<span style="background: red; color: black;">Off</span>'
         }<br/>
-        Heater Automation: ${
-          this.vivStore.heater.automate ? 'Automatic' : 'Manual'
-        }<br/>
-        Heater Runtime: ${prettyMilliseconds(
-          this.vivStore.heater.runtime
-        )}<br/><br/>
+        Heater Automation: ${this.vivStore.heater.automate ? "Automatic" : "Manual"}<br/>
+        Heater Runtime: ${prettyMilliseconds(this.vivStore.heater.runtime)}<br/><br/>
 
 
         Waterbowl State: ${
@@ -210,7 +206,7 @@ export default {
             : '<span style="background: red; color: black;">Off</span>'
         }<br/>
         Waterpump Automation: ${
-          this.vivStore.water.pump.automate ? 'Automatic' : 'Manual'
+          this.vivStore.water.pump.automate ? "Automatic" : "Manual"
         }<br/>
         Waterpump Countdown: ${prettyMilliseconds(
           this.vivStore.water.pump.countdown
@@ -224,57 +220,45 @@ export default {
             ? '<span style="background: green; color: black;">Running</span>'
             : '<span style="background: red; color: black;">Off</span>'
         }<br/>
-        Mister Automation: ${
-          this.vivStore.mister.automate ? 'Automatic' : 'Manual'
-        }<br/>
-        Mister Countdown: ${prettyMilliseconds(
-          this.vivStore.mister.countdown
-        )}<br/>
-        Mister Runtime: ${prettyMilliseconds(
-          this.vivStore.mister.runtime
-        )}<br/><br/>
+        Mister Automation: ${this.vivStore.mister.automate ? "Automatic" : "Manual"}<br/>
+        Mister Countdown: ${prettyMilliseconds(this.vivStore.mister.countdown)}<br/>
+        Mister Runtime: ${prettyMilliseconds(this.vivStore.mister.runtime)}<br/><br/>
 
         Lights: ${
           this.vivStore.lights.state
             ? '<span style="background: green; color: black;">On</span>'
             : '<span style="background: red; color: black;">Off</span>'
         }<br/>
-        Lights Automation: ${
-          this.vivStore.lights.automate ? 'Automatic' : 'Manual'
-        }<br/>
-        Lights Countdown: ${prettyMilliseconds(
-          this.vivStore.lights.countdown
-        )}<br/>
-        Lights Runtime: ${prettyMilliseconds(
-          this.vivStore.lights.runtime
-        )}<br/><br/>
+        Lights Automation: ${this.vivStore.lights.automate ? "Automatic" : "Manual"}<br/>
+        Lights Countdown: ${prettyMilliseconds(this.vivStore.lights.countdown)}<br/>
+        Lights Runtime: ${prettyMilliseconds(this.vivStore.lights.runtime)}<br/><br/>
 
         Sunrise: ${this.secondsToTime(this.vivStore.lights.sunrise)}a<br/>
         Sunset: ${this.secondsToTime(this.vivStore.lights.sunset)}p
-      `
+      `;
     },
   },
   watch: {
     vivStore: {
       deep: true,
       handler: function (val, oldVal) {
-        this.lightsStatus = val.lights.state
+        this.lightsStatus = val.lights.state;
       },
     },
   },
   mounted() {
-    this.lightsStatus = this.vivStore.lights.state
-    this.updateChart()
+    this.lightsStatus = this.vivStore.lights.state;
+    this.updateChart();
     setInterval(() => {
-      this.updateChart()
-    }, 1000)
+      this.updateChart();
+    }, 1000);
 
     // Reset the dataset to prevent memory leak
     setInterval(() => {
       this.chartSeries.forEach((series) => {
-        series.data = series.data.slice(series.data.length - 20)
-      })
-    }, 1000 * 60 * 60)
+        series.data = series.data.slice(series.data.length - 20);
+      });
+    }, 1000 * 60 * 60);
 
     /*this.$connect('wss://68.199.47.113:3001', { format: 'json' })
     this.ws1 = this.$socket
@@ -282,52 +266,52 @@ export default {
       console.log(data)
     }*/
 
-    var ctx = this.$refs['streamCanvas'].getContext('2d')
+    var ctx = this.$refs["streamCanvas"].getContext("2d");
 
-    this.$connect('ws://68.199.47.113:54018', { format: 'json' })
-    this.ws2 = this.$socket
+    this.$connect("ws://68.199.47.113:54018", { format: "json" });
+    this.ws2 = this.$socket;
 
     this.ws2.onmessage = (data) => {
-      let image = new Image()
+      let image = new Image();
       image.onload = function () {
-        ctx.drawImage(image, 0, 0)
-      }
-      image.src = data.data
-    }
+        ctx.drawImage(image, 0, 0);
+      };
+      image.src = data.data;
+    };
   },
   methods: {
     secondsToTime(t) {
-      const dt = new Date(t)
-      const hr = (dt.getHours() + 24) % 12 || 12
-      const m = '0' + dt.getMinutes()
+      const dt = new Date(t);
+      const hr = (dt.getHours() + 24) % 12 || 12;
+      const m = "0" + dt.getMinutes();
 
-      return hr + ':' + m.substr(-2)
+      return hr + ":" + m.substr(-2);
     },
     updateChart() {
-      const time = new Date().getTime()
-      let chartSeries = JSON.parse(JSON.stringify(this.chartSeries))
+      const time = new Date().getTime();
+      let chartSeries = JSON.parse(JSON.stringify(this.chartSeries));
       chartSeries[0].data.push({
         x: time,
         y: this.vivStore.humiture.humidity,
-      })
+      });
 
       chartSeries[1].data.push({
         x: time,
         y: this.vivStore.humiture.temperature,
-      })
-      this.chartSeries = chartSeries
+      });
+      this.chartSeries = chartSeries;
       if (process.client) {
       }
     },
     async switchLight() {
-      const status = +!this.lightsStatus
-      await this.$axios.get(`/api/proxy/lights/${status}`)
+      const status = +!this.lightsStatus;
+      await this.$axios.get(`/api/proxy/lights/${status}`);
     },
     async runMister() {
-      await this.$axios.get('/api/proxy/mist')
+      await this.$axios.get("/api/proxy/mist");
     },
   },
-}
+};
 </script>
 
 <style>
